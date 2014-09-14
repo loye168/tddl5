@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tables xmlns="https://github.com/tddl/tddl/schema/table" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/tddl/tddl/schema/table https://raw.github.com/tddl/tddl/master/tddl-common/src/main/resources/META-INF/table.xsd">
+    
+	<table name="student">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="user">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="address" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	
+	<table name="orders">
+		<columns>
+			<column name="id" type="long" />
+			<column name="buyer_id" type="string" />
+			<column name="seller_id" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="buyer_id_idx" type="btree">
+				<keys>buyer_id</keys>
+				<values>id</values>
+			</indexMeta>
+			<indexMeta name="seller_id_idx" type="btree">
+				<keys>seller_id</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="student_shard_by_id_and_name">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="long" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="autoinc">
+		<columns>
+			<column name="id" type="long" auto_increment="true" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+	</table>
+	
+	<table name="table1">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	<table name="table2">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="table3">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+			<column name="score" type="long" />
+		</columns>
+		<primaryKey>id</primaryKey>
+	</table>
+	
+	<table name="table4">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+
+	<table name="table5">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+
+	<table name="table6">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	<table name="table7">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+	</table>
+
+	<table name="table8">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+	</table>
+
+	<table name="table9">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+			<column name="c1" type="long" />
+			<column name="c2" type="long" />
+			<column name="c3" type="long" />
+			<column name="c4" type="long" />
+			<column name="c5" type="long" />
+			<column name="c6" type="long" />
+			<column name="c7" type="long" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx2" type="btree">
+				<keys>school</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx3" type="btree">
+				<keys>c1</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx4" type="btree">
+				<keys>c2</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx5" type="btree">
+				<keys>c3</keys>
+				<values>id</values>
+			</indexMeta>
+
+
+			<indexMeta name="second_idx3" type="btree">
+				<keys>c1,c2</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx4" type="btree">
+				<keys>c2,c3</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx5" type="btree">
+				<keys>c3,c1</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx6" type="inverse">
+				<keys>c4</keys>
+				<values>id</values>
+			</indexMeta>
+
+			<indexMeta name="second_idx7" type="inverse">
+				<keys>c5</keys>
+				<values>id</values>
+			</indexMeta>
+			
+			<indexMeta name="second_idx7" type="inverse">
+				<keys>c6</keys>
+				<values>id</values>
+			</indexMeta>
+			<indexMeta name="second_idx7" type="inverse">
+				<keys>c7</keys>
+				<values>id</values>
+			</indexMeta>
+			
+			
+			<indexMeta name="second_idx3" type="btree">
+				<keys>c6,c7</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+
+	<table name="table10">
+		<columns>
+			<column name="id" type="long" />
+			<column name="c1" type="long" />
+			<column name="c2" type="long" />
+		</columns>
+		<primaryKey>id</primaryKey>
+
+
+		<secondaryIndexes>
+			<indexMeta name="c1_index" type="btree">
+				<keys>c1</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="table11">
+		<columns>
+			<column name="id" type="long" />
+			<column name="c1" type="long" />
+			<column name="c2" type="long" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="c1_index" type="btree">
+				<keys>c1</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="ItemInfo">
+		<columns>
+			<column name="userID" type="long" />
+			<column name="itemID" type="long" />
+			<column name="itemType" type="long" />
+			<column name="info" type="string" />
+		</columns>
+		<primaryKey>itemID</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="userID_idx" type="btree">
+				<keys>userID</keys>
+				<values>itemID</values>
+			</indexMeta>
+
+			<indexMeta name="itemType_idx" type="btree">
+				<keys>itemType</keys>
+				<values>itemID</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	<table name="course">
+		<columns>
+			<column name="cid" type="long" />
+			<column name="sid" type="long" />
+			<column name="course_name" type="string" />
+		</columns>
+
+		<primaryKey>cid</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="course_index" type="btree">
+				<keys>sid</keys>
+				<values>cid</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+
+
+	<table name="ItemUrl">
+
+		<columns>
+			<column name="itemUrlID" type="long" />
+			<column name="userID" type="long" />
+			<column name="itemID" type="long" />
+			<column name="itemType" type="long" />
+			<column name="url" type="string" />
+		</columns>
+		<primaryKey>itemUrlID</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="userID_idx" type="btree">
+				<keys>userID</keys>
+				<values>itemUrlID</values>
+			</indexMeta>
+
+			<indexMeta name="itemID_idx" type="btree">
+				<keys>itemID</keys>
+				<values>itemUrlID</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+
+	
+	
+	<table name="t1">
+		<columns>
+			<column name="id" type="long" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+		</columns>
+		<primaryKey>id</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="second_idx" type="btree">
+				<keys>name</keys>
+				<values>id</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="t2">
+		<columns>
+			<column name="cid" type="long" />
+			<column name="sid" type="long" />
+			<column name="course_name" type="string" />
+		</columns>
+
+		<primaryKey>cid</primaryKey>
+		<secondaryIndexes>
+			<indexMeta name="t2_index" type="btree">
+				<keys>sid</keys>
+				<values>cid</values>
+			</indexMeta>
+		</secondaryIndexes>
+	</table>
+	
+	<table name="normaltbl_oneGroup_mutilAtom">
+		<columns>
+			<column name="pk" type="long" />
+			<column name="id" type="int" />
+			<column name="gmt_create" type="date" />
+			<column name="name" type="string" />
+			<column name="floatCol" type="float" />
+		</columns>
+		<primaryKey>pk</primaryKey>
+	</table>
+	
+	<table name="normaltbl_mutilGroup">
+		<columns>
+			<column name="pk" type="long" />
+			<column name="id" type="int" />
+			<column name="gmt_create" type="date" />
+			<column name="name" type="string" />
+			<column name="floatCol" type="float" />
+		</columns>
+		<primaryKey>pk</primaryKey>
+	</table>
+</tables>

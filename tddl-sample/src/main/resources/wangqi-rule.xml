@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.rule.VirtualTableRoot"
+		init-method="init">
+		<property name="defaultDbIndex" value="IM_WANGQI_GROUP" />
+	</bean>
+
+	<bean id="wq_team_task" class="com.taobao.tddl.rule.TableRule">
+		<property name="dbNamePattern" value="IM_WANGQI_GROUP" />
+		<property name="tbRuleArray" value="#project_id,1,256#.longValue() % 256" />
+		<property name="tbNamePattern" value="wq_team_task_{0000}" />
+	</bean>
+</beans>

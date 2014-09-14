@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CobarManager</title>
+<link type="text/css" href="css/common.css" rel="stylesheet"/>
+<link type="text/css" href="css/skin.css" rel="stylesheet"/>
+<link type="text/css" href="css/cobar.css" rel="stylesheet"/>
+<link type="text/css" href="css/calendar.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script> 
+<script language="javascript" type="text/javascript" src="js/common.js"></script>
+<script language="javascript" type="text/javascript" src="js/FormValidate.js"></script>
+<script language="javascript" type="text/javascript" src="js/calendar.js"></script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function() { 
+	$(".modalClose").click(function() {
+		$(window.parent.document).find(".modalClose").trigger('click');
+	})
+});
+
+
+
+function checkForm(flag){
+
+	document.getElementById('addAppForm').submit();
+			
+}
+
+</script>
+</head>
+
+<body class="pop">
+<table cellpadding="0" cellspacing="0" class="pop_top">
+ <tr>
+  <td width="" class="pop_lefttop_small">
+    <div><h1>新增App:</h1></div>
+  </td>
+  <td valign="top" class="pop_righttop_small"><div class="pop_close modalClose"></div></td>
+ </tr>
+</table>
+<form id="addAppForm" name="addAppForm" method="POST" action="addApp.do">
+<input name="clusterId" id="clusterId" type="hidden" value="$clusterId"/>
+<table cellpadding="0" cellspacing="0" class="pop_mid">
+ <tr>
+  <td class="pop_left"></td>
+  <td valign="top" class="pop_content">
+  <table border="0" cellspacing="0" cellpadding="0" class="pop_box">
+     <tr>
+       <th> AppName :</th>
+       <td><input name="appName" id="appName" type="text" style="float:left; margin-right:5px; vertical-align:bottom;"/></td>
+	   <td ><span id="clusterNameSpan">&nbsp;</span></td>
+     </tr>
+     <tr>
+       <th> 密码 :</th>
+	    <td><input name="password" id="password" type="text" style="float:left; margin-right:5px; vertical-align:bottom;"  /></td>
+		<td ><span id="deployNameSpan">&nbsp;</span></td>
+     </tr>
+  </table>
+  </div>
+    <div class="btn_update">
+      <div class="btn" style="margin:0 0 10px 200px;"><a href="javascript:checkForm(true)">提交</a></div>
+    </div>
+  </td>
+  <td class="pop_right"></td>
+ </tr>
+ <tr>
+  <td class="pop_leftbottom_small"></td>
+  <td class="pop_midbottom_small"></td>
+  <td class="pop_rightbottom_small"></td>
+ </tr>
+</table>
+</form>
+</body>
+</html>

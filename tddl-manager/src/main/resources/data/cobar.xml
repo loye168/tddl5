@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cobars>
+  <cobar>
+    <property name="id">1</property>
+    <property name="clusterId">1</property>
+    <property name="name">corona</property>
+    <property name="status">Active</property>
+    <property name="host">10.249.193.170</property>
+    <property name="serverPort">8508</property>
+    <property name="port">9508</property>
+    <property name="user">YUNJI_APP</property>
+    <property name="password">71dedf5e45d141cee30031660180113d</property>
+    <property name="time_diff">0</property>
+  </cobar>
+</cobars>

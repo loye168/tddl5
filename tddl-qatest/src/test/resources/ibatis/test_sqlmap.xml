@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+	<resultMap id="normalTblRow" class="com.taobao.tddl.qatest.util.NormalTblRow">
+		<result column="pk" property="pk" />
+		<result column="varcharr" property="varcharr" />
+		<result column="charr" property="charr" />
+		<result column="varbinaryr" property="varbinaryr" />
+		<result column="binaryr" property="binaryr" />
+		<result column="blobr" property="blobr" />
+		<result column="textr" property="textr" />
+		<result column="tinyintr" property="tinyintr" />
+		<result column="tinyintr_1" property="tinyintr_1" />
+		<result column="smallintr" property="smallintr" />
+		<result column="mediumintr" property="mediumintr" />
+		<result column="integerr" property="integerr" />
+		<result column="bigintr" property="bigintr" />
+		<result column="utinyintr" property="utinyintr" />
+		<result column="usmallintr" property="usmallintr" />
+		<result column="umediumintr" property="umediumintr" />
+		<result column="uintegerr" property="uintegerr" />
+		<result column="ubigintr" property="ubigintr" />
+		<result column="bitr" property="bitr" />
+		<result column="bitr_8" property="bitr_8" />
+		<result column="floatr" property="floatr" />
+		<result column="doubler" property="doubler" />
+		<result column="decimalr" property="decimalr" />
+		<result column="dater" property="dater" />
+		<result column="dater" property="dateString" />
+		<result column="timer" property="timer" />
+		<result column="datetimer" property="datetimer" />
+		<result column="datetimer" property="datetimeDate" />
+		<result column="timestampr" property="timestampr" />
+		<result column="yearr" property="yearr" />
+	</resultMap>
+	<!-- 为Person类设置一个别名 -->
+	<typeAlias alias="tddlTest" type="com.taobao.tddl.qatest.util.TddlTestDO" />
+
+	<!-- 配置表和实体Bean之间的映射关系 -->
+	<resultMap id="tddlTest" class="com.taobao.tddl.qatest.util.TddlTestDO">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="gmtCreate" column="gmt_create" />
+		<result property="gmtModified" column="gmt_modified" />
+	</resultMap>
+	
+	
+    <select id="select_test" resultMap="normalTblRow">
+ 		<![CDATA[
+		select * from mysql_ibatis_type where pk = #pk# order by pk asc
+		]]>
+	</select>
+	<select id="select_test_max" resultMap="normalTblRow">
+ 		<![CDATA[
+		select max(pk) as pk ,max(varcharr) as varcharr ,max(charr) as charr,max(varbinaryr) as varbinaryr,max(binaryr) as binaryr,max(blobr) as blobr ,max(textr) as textr,max(tinyintr)as tinyintr,max(tinyintr_1)as tinyintr_1,max(smallintr) as smallintr,max(mediumintr) as mediumintr,max(integerr) as integerr,max(bigintr) as bigintr,max(bitr_8) as bitr_8,
+		max(utinyintr) as utinyintr,max(usmallintr) as usmallintr,max(umediumintr) as umediumintr,max(uintegerr) as uintegerr,max(ubigintr) as ubigintr,max(bitr) as bitr,max(floatr) as floatr,max(doubler) as doubler,max(decimalr) as decimalr,max(dater) as dater,max(timer) as timer,max(datetimer) as datetimer,max(timestampr) as timestampr,max(yearr) as yearr
+		from mysql_ibatis_type where pk in 
+		]]>
+		<iterate property="pks" open="(" close=")" conjunction=",">
+			#pks[]#
+		</iterate>
+		<![CDATA[
+		 order by pk asc
+		]]>
+	</select>
+	<select id="select_test_min" resultMap="normalTblRow">
+ 		<![CDATA[
+		select min(pk) as pk ,min(varcharr) as varcharr ,min(charr) as charr,min(varbinaryr) as varbinaryr,min(binaryr) as binaryr,min(blobr) as blobr ,min(textr) as textr,min(tinyintr)as tinyintr,min(tinyintr_1)as tinyintr_1,min(smallintr) as smallintr,min(mediumintr) as mediumintr,min(integerr) as integerr,min(bigintr) as bigintr,min(bitr_8) as bitr_8,
+		min(utinyintr) as utinyintr,min(usmallintr) as usmallintr,min(umediumintr) as umediumintr,min(uintegerr) as uintegerr,min(ubigintr) as ubigintr,min(bitr) as bitr,min(floatr) as floatr,min(doubler) as doubler,min(decimalr) as decimalr,min(dater) as dater,min(timer) as timer,min(datetimer) as datetimer,min(timestampr) as timestampr,min(yearr) as yearr
+		from mysql_ibatis_type where pk in 
+		]]>
+		<iterate property="pks" open="(" close=")" conjunction=",">
+			#pks[]#
+		</iterate>
+		<![CDATA[
+		 order by pk asc
+		]]>
+	</select>
+	 <select id="select_tdhs_test" resultMap="normalTblRow">
+ 		<![CDATA[
+		select * from tdhs_ibatis_type where pk = #pk# order by pk asc
+		]]>
+	</select>
+	<insert id="insert_test">
+		insert into mysql_ibatis_type (pk,varcharr,charr,varbinaryr,binaryr,blobr,textr,tinyintr,tinyintr_1,smallintr,mediumintr,integerr,bigintr,utinyintr,usmallintr,umediumintr,uintegerr,ubigintr,bitr,bitr_8,floatr,doubler,decimalr,dater,timer,datetimer,timestampr,yearr) values
+		(#pk#,#varcharr#,#charr#,#varbinaryr#,#binaryr#,#blobr#,#textr#,#tinyintr#,#tinyintr_1#,#smallintr#,#mediumintr#,#integerr#,#bigintr#,#utinyintr#,#usmallintr#,#umediumintr#,#uintegerr#,#ubigintr#,#bitr#,#bitr_8#,#floatr#,#doubler#,#decimalr#,#dater#,#timer#,#datetimer#,#timestampr#,#yearr#)
+    </insert>
+    
+    <insert id="insert_tdhs_test">
+		insert into mysql_ibatis_type (pk,varcharr,charr,varbinaryr,binaryr,blobr,textr,tinyintr,tinyintr_1,smallintr,mediumintr,integerr,bigintr,utinyintr,usmallintr,umediumintr,uintegerr,ubigintr,bitr,bitr_8,floatr,doubler,decimalr,dater,timer,datetimer,timestampr,yearr) values
+		(#pk#,#varcharr#,#charr#,#varbinaryr#,#binaryr#,#blobr#,#textr#,#tinyintr#,#tinyintr_1#,#smallintr#,#mediumintr#,#integerr#,#bigintr#,#utinyintr#,#usmallintr#,#umediumintr#,#uintegerr#,#ubigintr#,#bitr#,#bitr_8#,#floatr#,#doubler#,#decimalr#,#dater#,#timer#,#datetimer#,#timestampr#,#yearr#)
+    </insert>
+    	<insert id="delete_test">
+		delete from mysql_ibatis_type where pk=#pk#
+    </insert>
+        	<insert id="delete_tdhs_test">
+		delete from tdhs_ibatis_type where pk=#pk#
+    </insert>
+    <insert id="insertUser" parameterClass="tddlTest">
+		<![CDATA[
+			insert into tddl_test (id,name) values (#id#,#name#)
+		]]>
+	</insert>
+
+	<!-- 查看特定用户 -->
+	<select id="queryUserById" parameterClass="long" resultMap="tddlTest">
+		<![CDATA[
+			SELECT * FROM tddl_test WHERE id=#id#
+		]]>
+	</select>
+	<!-- 查看特定用户 -->
+	<delete id="deleteUser" parameterClass="long">
+		<![CDATA[
+			delete FROM tddl_test WHERE id=#id#
+		]]>
+	</delete>
+	
+	<insert id="insertUser_one" parameterClass="tddlTest">
+		<![CDATA[
+			insert into tddl_test_0001 (name) values (#name#)
+		]]>
+		<selectKey resultClass="long" keyProperty="id">   
+             SELECT LAST_INSERT_ID() AS ID   
+        </selectKey>
+	</insert>
+
+	<!-- 查看特定用户 -->
+	<select id="queryUserById_one" parameterClass="long" resultMap="tddlTest">
+		<![CDATA[
+			SELECT * FROM tddl_test_0001 WHERE id=#id#
+		]]>
+	</select>
+	<!-- 查看特定用户 -->
+	<delete id="deleteUser_one" parameterClass="long">
+		<![CDATA[
+			delete FROM tddl_test_0001 WHERE id=#id#
+		]]>
+	</delete>
+</sqlMap>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot" init-method="init">
+    <property name="defaultDbIndex" value="DDBASE_GROUP"/>
+    <property name="dbType" value="MYSQL"></property>
+
+    <property name="tableRules">
+      <map>
+		<entry key="dd_auction" value-ref="dd_auction_bean"></entry>
+		<entry key="dd_auction_properties" value-ref="dd_auction_properties_bean"></entry>
+      </map>
+    </property>
+  </bean>
+  
+  <bean id="dd_auction_bean" class="com.taobao.tddl.interact.rule.TableRule">
+    <property name="dbNamePattern" value="DDBASE_GROUP"/>
+    <property name="tbNamePattern" value="dd_auction_{0000}"></property>
+    <property name="allowFullTableScan" value="true" />
+    <property name="tbRuleArray">
+        <list>
+         <value>(#id,1,16#.longValue()>>32) % 16</value>
+         <value> #user_id,1,16#.longValue() % 16</value>
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="dd_auction_properties_bean" class="com.taobao.tddl.interact.rule.TableRule">
+    <property name="dbNamePattern" value="DDBASE_GROUP"/>
+    <property name="tbNamePattern" value="dd_auction_properties_{0000}"></property>
+    <property name="tbRuleArray">
+      <value>(#auction_id,1,16#.longValue()>>32) % 16</value>
+    </property>
+  </bean>
+  
+</beans>

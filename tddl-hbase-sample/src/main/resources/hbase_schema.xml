@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tables>
+	<table name="student"  usePKRule = "true">
+		<columns>
+			<column name="id" type="int" />
+			<column name="name" type="string" />
+			<column name="school" type="string" />
+			<column name="c1" type="string" />
+			<column name="c2" type="string" />
+			<column name="c3" type="string" />
+		</columns>
+		<primaryKey>id,name,school</primaryKey>
+	</table>
+</tables>

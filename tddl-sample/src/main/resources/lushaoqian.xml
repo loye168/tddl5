@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot" init-method="init">
+        <property name="defaultDbIndex" value="WAP_AUKS_V3_GROUP"/>
+        <property name="dbType" value="MYSQL"></property>
+        <property name="tableRules">
+            <map>
+                <entry key="auks_task_detail_normal" value-ref="auks_task_detail_normal"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="auks_task_detail_normal"  class="com.taobao.tddl.interact.rule.TableRule">
+        <property name="dbNamePattern" value="WAP_AUKS_V3_GROUP" />
+        <property name="tbNamePattern" value="auks_task_detail_normal_{0000}" />
+        <property name="tbRuleArray" value="#task_id,1,10#.longValue() % 10"/>
+    </bean>
+    
+</beans>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot" init-method="init">
+    <property name="dbType" value="MYSQL" />
+    <property name="defaultDbIndex" value="DWUC_GROUP" />
+    <property name="tableRules">
+      <map>
+        <entry key="aplus_spm_agent" value-ref="aplus_spm_agent" />
+      </map>
+    </property>
+  </bean>
+  <bean id="aplus_spm_agent" class="com.taobao.tddl.interact.rule.TableRule">
+    <property name="dbNamePattern" value="DWUC_GROUP" />
+    <property name="tbNamePattern" value="aplus_spm_agent_{000000}" />
+    <property name="tbRuleArray" value="yyyymm(#gmt,1_month,12#)" />
+    <property name="allowFullTableScan" value="false" />
+  </bean>
+</beans>

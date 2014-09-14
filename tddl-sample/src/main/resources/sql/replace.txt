@@ -1,0 +1,4 @@
+REPLACE INTO adgroup(id, biz_number, campaign_id, cust_id, member_id, product_id,title, bid_price, 
+online_status, audit_status, audit_time, audit_reason, gmt_create, gmt_modified, op_id) 
+VALUES(1100000000100, 1100000000100, 2100000000100, 3100000000100, 4100000000100,1010101,
+'载思测试title1',1,1,1,now(), '载思测试reason1',now(),now(),1);

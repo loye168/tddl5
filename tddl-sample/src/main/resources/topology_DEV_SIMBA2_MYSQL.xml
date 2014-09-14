@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<matrix xmlns="https://github.com/tddl/tddl/schema/matrix" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/tddl/tddl/schema/matrix https://raw.github.com/tddl/tddl/master/tddl-common/src/main/resources/META-INF/matrix.xsd">
+<appName>DAILY_SOLAR_MERCURY_APP</appName>
+<group name="SOLAR_MERCURY_G_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P00_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P01_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P02_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P03_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P04_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P05_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P06_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P07_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P08_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P09_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P10_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P11_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P12_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P13_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P14_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P15_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P16_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P17_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P18_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P19_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P20_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P21_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P22_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P23_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P24_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P25_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P26_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P27_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P28_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P29_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P30_GROUP" type="MYSQL_JDBC"/>
+<group name="SOLAR_MERCURY_P31_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ0_GROUP1" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ1_GROUP1" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ2_GROUP1" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ3_GROUP1" type="MYSQL_JDBC"/>
+
+<group name="ob_group" type="OCEANBASE_JDBC">
+		<properties>
+			<property name="CONFIGURL">
+				<value>http://obconsole.test.alibaba-inc.com/ob-config/config.co?dataId=wireless_message</value>
+			</property>
+		</properties>
+	</group>
+</matrix>
