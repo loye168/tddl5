@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.rule.VirtualTableRoot" init-method="init">
+		<property name="dbType" value="MYSQL" />
+		<property name="defaultDbIndex" value="SUBWAY_DEV_G_GROUP" />
+	</bean>
+
+	<bean id="basePartionDBRule" class="com.taobao.tddl.interact.rule.TableRule"
+		abstract="true">
+		<property name="dbNamePattern" value="SUBWAY_DEV_P{00}_GROUP" />
+		<property name="dbRuleArray">
+			<value>(#custId,64,2048#.longValue() %2048).intdiv(64)</value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+	</bean>
+
+	<bean id="basePartionTableRule" class="com.taobao.tddl.interact.rule.TableRule"
+		parent="basePartionDBRule" abstract="true">
+		<property name="tbRuleArray">
+			<value>#custId,64,2048#.longValue() % 32</value>
+		</property>
+	</bean>
+
+	<!-- item module start -->
+	<bean id="lunaadgroup" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaadgroup" />
+ 	</bean>
+  	
+  	<bean id="lunaadgrouphis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaadgrouphis" />
+  	</bean>
+  	
+  	<bean id="lunaadgroupinfo" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaadgroupinfo" />
+  	</bean>
+  
+  	<bean id="lunaadgroupplace" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaadgroupplace" />
+  	</bean>
+  	
+  	<bean id="lunaadgroupplacehis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaadgroupplacehis" />
+  	</bean>
+  
+  	<bean id="lunabidword" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+    	<property name="tbNamePattern" value="lunabidword_{0000}" />
+  	</bean>
+  
+  	<bean id="lunabidwordhis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+    	<property name="tbNamePattern" value="lunabidwordhis_{0000}" />
+  	</bean>
+  
+  	<bean id="lunacatmatch" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacatmatch" />
+  	</bean>
+  	
+  	<bean id="lunacatmatchhis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacatmatchhis" />
+  	</bean>
+  	
+  	<bean id="lunacreative" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacreative" />
+  	</bean>
+  	
+  	<bean id="lunacreativehis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacreativehis" />
+  	</bean>
+  	
+  	<bean id="lunacreativeelement" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacreativeelement" />
+  	</bean>
+  	
+  	<bean id="lunacreativehiselement" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacreativehiselement" />
+  	</bean>
+  	
+  	<bean id="lunacreativerecord" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacreativerecord" />
+  	</bean>
+  	
+  	<bean id="lunacreativerecordelement" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacreativerecordelement" />
+  	</bean>
+	<!-- item module end -->
+	
+	<!-- quick module start -->
+	<bean id="lunacampbidword" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacampbidword" />
+  	</bean>
+  	
+  	<bean id="lunacampitem" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacampitem" />
+  	</bean>
+	<!-- quick module end -->
+	
+	<!-- wbitem module start -->
+	<bean id="lunacategoryrecord" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacategoryrecord" />
+  	</bean>
+	<!-- wbitem module end -->
+	
+	<!-- page module start -->
+	<bean id="lunapageadgroup" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapageadgroup" />
+  	</bean>
+  	
+  	<bean id="lunapageadgrouphis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapageadgrouphis" />
+  	</bean>
+  	
+  	<bean id="lunapageadgroupinfo" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapageadgroupinfo" />
+  	</bean>
+  	
+  	<bean id="lunapageadgroupplace" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapageadgroupplace" />
+  	</bean>
+  	
+  	<bean id="lunapageadgroupplacehis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapageadgroupplacehis" />
+  	</bean>
+  	
+  	<bean id="lunapagebidword" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapagebidword" />
+  	</bean>
+  	
+  	<bean id="lunapagebidwordhis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapagebidwordhis" />
+  	</bean>
+  
+  	<bean id="lunapagecatmatch" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapagecatmatch" />
+  	</bean>
+  
+  	<bean id="lunapagecatmatchhis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapagecatmatchhis" />
+  	</bean>
+  
+  	<bean id="lunapagecreative" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapagecreative" />
+  	</bean>
+  
+  	<bean id="lunapagecreativehis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapagecreativehis" />
+  	</bean>
+  	
+  	<bean id="lunapagecreativerecord" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunapagecreativerecord" />
+  	</bean>
+	<!-- page module end -->
+	
+	<!-- campaign module start -->
+	<bean id="lunaareasetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaareasetting" />
+  	</bean>
+  	
+  	<bean id="lunabidsetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunabidsetting" />
+  	</bean>
+  	
+  	<bean id="lunabidsettinghis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunabidsettinghis" />
+  	</bean>
+  	
+	<bean id="lunacampaign" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacampaign" />
+  	</bean>
+  	
+  	<bean id="lunacampaignhis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunacampaignhis" />
+  	</bean>
+  	
+  	<bean id="lunademographicsetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunademographicsetting" />
+  	</bean>
+  	
+  	<bean id="lunaplsetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaplsetting" />
+  	</bean>
+  	
+  	<bean id="lunaremindsetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaremindsetting" />
+  	</bean>
+  
+  	<bean id="lunaremindlog" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunaremindlog" />
+  	</bean>
+  	
+  	<bean id="lunatimesetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunatimesetting" />
+  	</bean>
+  	
+  	<bean id="lunatimetemplete" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunatimetemplete" />
+  	</bean>
+  	<!-- campaign module end -->
+  
+	<!-- rpt module start -->
+	<bean id="lunarptdimensionfilter" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunarptdimensionfilter" />
+  	</bean>
+  	
+  	<bean id="lunadimensionsetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunadimensionsetting" />
+  	</bean>
+
+  	<bean id="lunarptfieldsetting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+    	<property name="tbNamePattern" value="lunarptfieldsetting" />
+  	</bean>
+
+
+    <bean id="lunarptfiletask" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+        <property name="tbNamePattern" value="lunarptfiletask" />
+    </bean>
+    <bean id="lunarptfilesubtask" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+        <property name="tbNamePattern" value="lunarptfilesubtask" />
+    </bean>
+    <bean id="lunarptfiletaskref" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+        <property name="tbNamePattern" value="lunarptfiletaskref" />
+    </bean>
+
+	<!-- rpt module end -->
+	
+	<!-- tag module start -->
+	<bean id="lunaadgrouptag" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+    	<property name="tbNamePattern" value="lunaadgrouptag_{0000}" />
+  	</bean>
+  
+  	<bean id="lunaadgrouptaghis" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+    	<property name="tbNamePattern" value="lunaadgrouptaghis_{0000}" />
+  	</bean>
+  	<!-- tag module end -->
+	
+	
+	
+    <!-- ob table start -->
+	<bean id="rpt_solar_adgroup_ob" class="com.taobao.tddl.interact.rule.TableRule">
+    	<property name="tbNamePattern" value="rpt_solar_adgroup_ob" />
+		<property name="dbNamePattern" value="ob_group" />
+  	</bean>
+  	<!-- ob table end -->
+
+
+</beans>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<matrix xmlns="https://github.com/tddl/tddl/schema/matrix"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/tddl/tddl/schema/matrix https://raw.github.com/tddl/tddl/master/tddl-common/src/main/resources/META-INF/matrix.xsd">
+	<appName>tddl5_sample</appName>
+	
+
+	<group name="tddl5_sample_group" type="MYSQL_JDBC">
+
+
+		<!-- group config -->
+		<properties>
+
+			<!-- group r/w weight,format is : com.taobao.tddl.jdbc.group_V2.4.1_{group_name} -->
+			<property name="com.taobao.tddl.jdbc.group_V2.4.1_tddl5_sample_group">
+				<value>tddl5_sample_group_atom0:r10w10p0</value>
+			</property>
+		</properties>
+
+		<!-- atom config in this group -->
+		<atom name="tddl5_sample_group_atom0">
+			<properties>
+
+				<!-- global atom config, format is : com.taobao.tddl.atom.global.{atom_name} -->
+				<property name="com.taobao.tddl.atom.global.tddl5_sample_group_atom0">
+					<value>
+						ip=127.0.0.1
+						port=3306
+						dbName=tddl_sample
+						dbType=mysql
+						dbStatus=RW
+					</value>
+				</property>
+				
+				<!-- app atom config, format is :  com.taobao.tddl.atom.app.{app_name}.{atom_name} -->
+				<property
+					name="com.taobao.tddl.atom.app.tddl5_sample.tddl5_sample_group_atom0">
+					<value>
+						userName=root
+						minPoolSize=20
+						maxPoolSize=40
+						idleTimeout=20
+						blockingTimeout=10000
+						preparedStatementCacheSize=1000
+						connectionProperties=characterEncoding=gbk;autoReconnect=true
+						readRestrictTimes=0
+						writeRestrictTimes=0
+						timeSliceInMillis=0
+					</value>
+				</property>
+				<!-- atom password , format is : com.taobao.tddl.atom.passwd.{db_name}.mysql.{user_name} -->
+				<property name="com.taobao.tddl.atom.passwd.tddl_sample.mysql.root">
+					<value>root</value>
+				</property>
+			</properties>
+		</atom>
+	</group>
+	
+	<group name="demo_group" type="demo">
+
+	</group>
+</matrix>

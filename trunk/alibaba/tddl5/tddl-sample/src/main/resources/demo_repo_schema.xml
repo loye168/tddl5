@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tables xmlns="https://github.com/tddl/tddl/schema/table" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/tddl/tddl/schema/table https://raw.github.com/tddl/tddl/master/tddl-common/src/main/resources/META-INF/table.xsd">
+    
+	<table name="_tddl_">
+		<columns>
+			<column name="id" type="int"/>
+			<column name="name" type="string"/>
+		</columns>
+		<primaryKey>id</primaryKey>
+	</table>
+	
+	
+</tables>

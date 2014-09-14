@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
+
+    <bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot"
+          init-method="init">
+        <property name="defaultDbIndex" value="LIFESERVICE_GROUP"/>
+        <property name="dbType" value="MYSQL"/>
+        <property name="tableRules">
+            <map>
+                <entry key="life_card" value-ref="life_card_rule"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="life_card_rule" class="com.taobao.tddl.interact.rule.TableRule">
+        <property name="extraPackages">
+            <list>
+                <value>com.yunos.lifecenter.util.TabUtil</value>
+            </list>
+        </property>
+        <property name="dbNamePattern" value="LIFESERVICE_GROUP"/>
+        <property name="tbNamePattern" value="life_card_{0000}"/>
+        <property name="tbRuleArray">
+            <value>
+                TabUtil.beforeConvertValue(#owner_id,1,100#) % 100
+            </value>
+        </property>
+        <property name="allowFullTableScan" value="true"/>
+    </bean>
+</beans>

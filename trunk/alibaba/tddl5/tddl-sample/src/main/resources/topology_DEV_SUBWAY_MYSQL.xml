@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<matrix xmlns="https://github.com/tddl/tddl/schema/matrix" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/tddl/tddl/schema/matrix https://raw.github.com/tddl/tddl/master/tddl-common/src/main/resources/META-INF/matrix.xsd">
+<appName>DEV_SIMBA2_DB</appName>
+<group name="SUBWAY_DEV_G_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P00_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P01_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P02_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P03_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P04_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P05_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P06_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P07_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P08_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P09_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P10_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P11_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P12_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P13_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P14_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P15_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P16_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P17_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P18_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P19_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P20_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P21_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P22_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P23_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P24_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P25_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P26_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P27_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P28_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P29_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P30_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_DEV_P31_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ0_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ1_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ2_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ3_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ4_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ5_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ6_GROUP" type="MYSQL_JDBC"/>
+<group name="SUBWAY_SEQ7_GROUP" type="MYSQL_JDBC"/>
+<group name="ob_group" type="OCEANBASE_JDBC">
+		<properties>
+			<property name="CONFIGURL">
+				<value>http://obconsole.test.alibaba-inc.com/ob-config/config.co?dataId=wireless_message</value>
+			</property>
+		</properties>
+	</group>
+</matrix>

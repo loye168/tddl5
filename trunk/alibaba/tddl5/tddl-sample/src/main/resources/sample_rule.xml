@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.rule.VirtualTableRoot"
+		init-method="init">
+		<property name="dbType" value="MYSQL" />
+		<property name="defaultDbIndex" value="tddl5_sample_group" />
+		<property name="tableRules">
+			<map>
+				<entry key="sample_table" value-ref="sample_table" />
+				<entry key="_tddl_" value-ref="_tddl_" />
+			</map>
+		</property>
+	</bean>
+
+	
+	<bean id="sample_table" class="com.taobao.tddl.rule.TableRule">
+		<property name="allowFullTableScan" value="true" />
+		<property name="dbNamePattern" value="tddl5_sample_group" />
+		<property name="tbRules" value="Math.abs(Long.valueOf(#id,1,4#)) % 4" />
+		<property name="tbNamePattern" value="sample_table_{0000}" />
+	</bean>
+	
+	<bean id="_tddl_" class="com.taobao.tddl.rule.TableRule">
+		<property name="allowFullTableScan" value="true" />
+		<property name="dbNamePattern" value="demo_group" />
+		<property name="tbNamePattern" value="_tddl_{0000}" />
+		<property name="tbRules" value="Math.abs(Long.valueOf(#id,1,4#)) % 4" />
+	</bean>
+</beans>

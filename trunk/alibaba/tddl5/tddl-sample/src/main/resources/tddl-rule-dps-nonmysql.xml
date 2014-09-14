@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="vtabroot" class="com.taobao.tddl.rule.VirtualTableRoot" init-method="init">
+		<property name="dbType" value="MYSQL" />
+		<property name="defaultDbIndex" value="ob_group" />
+	</bean>
+	
+    <!-- ob table start -->
+	<bean id="rpt_solar_adgroup_ob" class="com.taobao.tddl.interact.rule.TableRule">
+    	<property name="tbNamePattern" value="rpt_solar_adgroup_ob" />
+		<property name="dbNamePattern" value="ob_group" />
+  	</bean>
+  	<!-- ob table end -->
+
+
+</beans>

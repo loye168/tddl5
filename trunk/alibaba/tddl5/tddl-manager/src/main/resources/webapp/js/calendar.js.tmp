@@ -1,0 +1,139 @@
+/************************************************************************************************************
+JS Calendar
+Copyright (C) September 2006  DTHMLGoodies.com, Alf Magne Kalleland
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+Dhtmlgoodies.com., hereby disclaims all copyright interest in this script
+written by Alf Magne Kalleland.
+
+Alf Magne Kalleland, 2006
+Owner of DHTMLgoodies.com
+
+************************************************************************************************************/
+
+/* Update log:
+(C) www.dhtmlgoodies.com, September 2005
+
+Version 1.2, November 8th - 2005 - Added <iframe> background in IE
+Version 1.3, November 12th - 2005 - Fixed top bar position in Opera 7
+Version 1.4, December 28th - 2005 - Support for Spanish and Portuguese
+Version 1.5, January  18th - 2006 - Fixed problem with next-previous buttons after a month has been selected from dropdown
+Version 1.6, February 22nd - 2006 - Added variable which holds the path to images.
+									Format todays date at the bottom by use of the todayStringFormat variable
+									Pick todays date by clicking on todays date at the bottom of the calendar
+Version 2.0	 May, 25th - 2006	  - Added support for time(hour and minutes) and changing year and hour when holding mouse over + and - options. (i.e. instead of click)
+Version 2.1	 July, 2nd - 2006	  - Added support for more date formats(example: d.m.yyyy, i.e. one letter day and month).
+
+// Modifications by Gregg Buntin
+Version 2.1.1 8/9/2007  gfb   - Add switch to turn off Year Span Selection
+                                This allows me to only have this year & next year in the drop down
+                                     
+Version 2.1.2 8/30/2007 gfb  - Add switch to start week on Sunday
+                               Add switch to turn off week number display
+                               Fix bug when using on an HTTPS page
+
+*/
+var turnOffYearSpan = false;     // true = Only show This Year and Next, false = show +/- 5 years
+var weekStartsOnSunday = false;  // true = Start the week on Sunday, false = start the week on Monday
+var showWeekNumber = true;  // true = show week number,  false = do not show week number
+
+var languageCode = 'en';	// Possible values: 	en,ge,no,nl,es,pt-br,fr
+							// en = english, ge = german, no = norwegian,nl = dutch, es = spanish, pt-br = portuguese, fr = french, da = danish, hu = hungarian(Use UTF-8 doctype for hungarian)
+
+var calendar_display_time = true;
+
+// Format of current day at the bottom of the calendar
+// [todayString] = the value of todayString
+// [dayString] = day of week (examle: mon, tue, wed...)
+// [UCFdayString] = day of week (examle: Mon, Tue, Wed...) ( First letter in uppercase)
+// [day] = Day of month, 1..31
+// [monthString] = Name of current month
+// [year] = Current year
+var todayStringFormat = '[todayString] [UCFdayString]. [day]. [monthString] [year]';
+var pathToImages = 'images/';	// Relative to your HTML file
+
+var speedOfSelectBoxSliding = 200;	// Milliseconds between changing year and hour when holding mouse over "-" and "+" - lower value = faster
+var intervalSelectBox_minutes = 5;	// Minute select box - interval between each option (5 = default)
+
+var calendar_offsetTop = 0;		// Offset - calendar placement - You probably have to modify this value if you're not using a strict doctype
+var calendar_offsetLeft = 0;	// Offset - calendar placement - You probably have to modify this value if you're not using a strict doctype
+var calendarDiv = false;
+
+var MSIE = false;
+var Opera = false;
+if(navigator.userAgent.indexOf('MSIE')>=0 && navigator.userAgent.indexOf('Opera')<0)MSIE=true;
+if(navigator.userAgent.indexOf('Opera')>=0)Opera=true;
+
+
+switch(languageCode){
+	case "en":	/* English */
+		var monthArray = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+		var monthArrayShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		var dayArray = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+		var weekString = 'Week';
+		var todayString = '';
+		break;
+	case "ge":	/* German */
+		var monthArray = ['Januar','Februar','M锟絩z','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+		var monthArrayShort = ['Jan','Feb','Mar','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+		var dayArray = ['Mon','Die','Mit','Don','Fre','Sam','Son'];
+		var weekString = 'Woche';
+		var todayString = 'Heute';
+		break;
+	case "no":	/* Norwegian */
+		var monthArray = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+		var monthArrayShort = ['Jan','Feb','Mar','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Des'];
+		var dayArray = ['Man','Tir','Ons','Tor','Fre','L&oslash;r','S&oslash;n'];
+		var weekString = 'Uke';
+		var todayString = 'Dagen i dag er';
+		break;
+	case "nl":	/* Dutch */
+		var monthArray = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+		var monthArrayShort = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
+		var dayArray = ['Ma','Di','Wo','Do','Vr','Za','Zo'];
+		var weekString = 'Week';
+		var todayString = 'Vandaag';
+		break;
+	case "es": /* Spanish */
+		var monthArray = ['Enero','Febrero','Marzo','April','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+		var monthArrayShort =['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+		var dayArray = ['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
+		var weekString = 'Semana';
+		var todayString = 'Hoy es';
+		break;
+	case "pt-br":  /* Brazilian portuguese (pt-br) */
+		var monthArray = ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+		var monthArrayShort = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+		var dayArray = ['Seg','Ter','Qua','Qui','Sex','S&aacute;b','Dom'];
+		var weekString = 'Sem.';
+		var todayString = 'Hoje &eacute;';
+		break;
+	case "fr":      /* French */
+		var monthArray = ['Janvier','F锟絭rier','Mars','Avril','Mai','Juin','Juillet','Ao锟絫','Septembre','Octobre','Novembre','D锟絚embre'];
+		var monthArrayShort = ['Jan','Fev','Mar','Avr','Mai','Jun','Jul','Aou','Sep','Oct','Nov','Dec'];
+		var dayArray = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+		var weekString = 'Sem';
+		var todayString = "Aujourd'hui";
+		break;
+	case "da": /*Danish*/
+		var monthArray = ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'];
+		var monthArrayShort = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+		var dayArray = ['man','tirs','ons','tors','fre','l&oslash;r','s&oslash;n'];
+		var weekString = 'Uge';
+		var todayString = 'I dag er den';
+		break;
+	case "hu":	/* Hungarian  - Remember to use UTF-8 encoding, i.e. the <meta> tag */
+		var monthArray = ['Janu谩r','Febru谩r','M谩rcius','锟

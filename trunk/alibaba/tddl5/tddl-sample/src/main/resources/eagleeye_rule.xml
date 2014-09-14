@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.rule.VirtualTableRoot"
+		init-method="init">
+		<property name="dbType" value="MYSQL" />
+		<property name="defaultDbIndex" value="eagleeye_group" />
+		<property name="tableRules">
+			<map>
+				<entry key="jaeLog" value-ref="jaeLog" />
+			</map>
+		</property>
+	</bean>
+
+	
+	<bean id="jaeLog" class="com.taobao.tddl.rule.TableRule">
+		<property name="allowFullTableScan" value="true" />
+		<property name="dbNamePattern" value="eagleeye_group" />
+		<property name="tbRules">
+			<value>
+			return "jaeLog_" + (#pid?,1,12#.longValue() % 12) + "_" + ((#tracetime,86400000,10# + 28800000).longValue().div(86400000).longValue() % 10);
+			</value>
+		</property>
+	</bean>
+</beans>

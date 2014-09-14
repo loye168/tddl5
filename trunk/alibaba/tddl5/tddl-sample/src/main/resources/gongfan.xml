@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="root" class="com.taobao.tddl.common.config.beans.AppRule" init-method="init">
+        <property name="readwriteRule" ref="readwriteRule"/>
+    </bean>
+    <bean id="readwriteRule" class="com.taobao.tddl.common.config.beans.ShardRule">
+        <property name="dbtype" value="MYSQL"/>
+        <property name="defaultDbIndex" value="TMALL_MEMBER_GROUP"/>
+        <property name="tableRules">
+            <map>
+                <entry key="tmall_member" value-ref="tmall_member" />
+                <entry key="record_club" value-ref="record_club" />
+                <entry key="temporary_club" value-ref="temporary_club" />
+                <entry key="tmall_member_own_prop" value-ref="tmall_member_own_prop" />
+                <entry key="tmall_member_use_prop" value-ref="tmall_member_use_prop" />
+                <entry key="tmall_baby" value-ref="tmall_baby"/>
+                <entry key="tmall_checkin" value-ref="tmall_checkin" />
+                <entry key="tmall_member_guess_record" value-ref="tmall_member_guess_record" />
+            </map>
+        </property>
+    </bean>
+    <bean id="record_club" class="com.taobao.tddl.common.config.beans.TableRule">
+        <!-- 数据库组index号  -->
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <!-- 使用这种模式的时候，可以不需要指定枚举器的起止日期，tddl会自动根据当前时间，向前向后推2年进行表名枚举-->
+        <property name="tableGenerationType" value="DATE_SIMPLE_AUTO"/>
+        <!-- 使用groovy 脚本进行表名的生成-->
+        <property name="calendarType" value="GROOVY"/>
+        <!-- 脚本 使用这种脚本可以自定义日期函数的生成模式，具体请见com.taobao.tddl.rule.bean.SimpleDateTableMapProvider.StringListHandler-->
+        <property name="groovyScript">
+            <value>
+                <![CDATA[
+					import java.util.ArrayList;
+					import java.util.Calendar;
+					import java.text.SimpleDateFormat;
+					import com.taobao.tddl.rule.bean.SimpleDateTableMapProvider.CALENDAR_TYPE;
+					import com.taobao.tddl.rule.bean.SimpleDateTableMapProvider.DefaultStringListHandler;
+					import com.taobao.tddl.rule.ruleengine.util.RuleUtils;
+					public class Inbox_StringListHandler extends DefaultStringListHandler{
+					    protected List<String> buildArgsList(CALENDAR_TYPE calendarType,
+					    SimpleDateFormat simpleDateFormat, Calendar cal, Calendar calDis) {
+
+                        List<String> dateArgsList = new ArrayList<String>();
+                        while (cal.compareTo(calDis) <= 0) {
+                            dateArgsList.add(getMonthString(cal));
+                            cal.add(Calendar.MONTH, 1);
+                        }
+                        return dateArgsList;
+
+					}
+
+					private String getMonthString(Calendar cal){
+						int month = cal.get(Calendar.MONTH);
+						return String.valueOf(RuleUtils.placeHolder(2, month));
+					}
+
+				}
+				]]>
+            </value>
+        </property>
+
+        <!-- 分表规则-->
+        <property name="tbRuleArray">
+            <list>
+                <value>
+                    <![CDATA[
+					def date = #gmt_create,1_month,12#
+					def userId = Long.valueOf(#user_id#);
+					def month = getCalendar(date).get(Calendar.MONTH);
+					return placeHolder(6, (month) * 10000 + userId % 256);
+				]]>
+                </value>
+            </list>
+        </property>
+        <!-- 表后缀 -->
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="disableFullTableScan" value="true"/>
+    </bean>
+
+    <bean id="temporary_club" class="com.taobao.tddl.common.config.beans.TableRule">
+        <!-- 数据库组index号  -->
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <!-- 使用这种模式的时候，可以不需要指定枚举器的起止日期，tddl会自动根据当前时间，向前向后推2年进行表名枚举-->
+        <property name="tableGenerationType" value="DATE_SIMPLE_AUTO"/>
+        <!-- 使用groovy 脚本进行表名的生成-->
+        <property name="calendarType" value="GROOVY"/>
+        <!-- 脚本 使用这种脚本可以自定义日期函数的生成模式，具体请见com.taobao.tddl.rule.bean.SimpleDateTableMapProvider.StringListHandler-->
+        <property name="groovyScript">
+            <value>
+                <![CDATA[
+					import java.util.ArrayList;
+					import java.util.Calendar;
+					import java.text.SimpleDateFormat;
+					import com.taobao.tddl.rule.bean.SimpleDateTableMapProvider.CALENDAR_TYPE;
+					import com.taobao.tddl.rule.bean.SimpleDateTableMapProvider.DefaultStringListHandler;
+					import com.taobao.tddl.rule.ruleengine.util.RuleUtils;
+
+					//这个继承了DefaultStringListHandler.为的是减少一些写在外面的代码量.
+					//过程可以理解为将输入的日期转化为需要的格式，然后变成String，放入list中
+					public class Inbox_StringListHandler extends DefaultStringListHandler{
+					    protected List<String> buildArgsList(CALENDAR_TYPE calendarType,
+
+                        SimpleDateFormat simpleDateFormat, Calendar cal, Calendar calDis) {
+                            List<String> dateArgsList = new ArrayList<String>();
+                            //在返回值列表内添加起始的日期
+                            dateArgsList.add(getNumByHalfMonth(cal));
+                            while (true) {
+                            //日期加一天
+                                cal.add(Calendar.DATE, 15);
+                                if (cal.compareTo(calDis) > 0) {
+                                    //进行计算
+                                    dateArgsList.add(getNumByHalfMonth(calDis));
+                                    break;
+                                } else {
+                                dateArgsList.add(getNumByHalfMonth(cal));
+                                }
+                            }
+                            return dateArgsList;
+                        }
+
+                        private String getNumByHalfMonth(Calendar cal){
+                            int date = cal.get(Calendar.DAY_OF_YEAR);
+                            return String.valueOf(RuleUtils.placeHolder(2,(date.intdiv(15) % 4)));
+                        }
+
+				    }
+
+				]]>
+            </value>
+        </property>
+
+        <!-- 分表规则-->
+        <property name="tbRuleArray">
+            <list>
+                <value>
+                    <![CDATA[
+					def date = #gmt_create,15,5#;
+					def userId = Long.valueOf(#user_id#);
+					def dayofyear = getCalendar(date).get(Calendar.DAY_OF_YEAR);
+					def dateSharedNum = dayofyear.intdiv(15) % 4 ;
+					return placeHolder(6, dateSharedNum * 10000 + userId % 64);
+				]]>
+                </value>
+            </list>
+        </property>
+        <!-- 表后缀 -->
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0063]"/>
+        <property name="disableFullTableScan" value="true"/>
+    </bean>
+
+    <bean id="tmall_member" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="tbRuleArray" value="#user_id#.longValue() % 256"/>
+        <property name="disableFullTableScan" value="true"/>
+    </bean>
+
+    <bean id="record_event" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="tbRuleArray" value="#user_id#.longValue() % 256"/>
+        <property name="disableFullTableScan" value="false"/>
+    </bean>
+
+    <bean id="record_owner" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="tbRuleArray" value="#user_id#.longValue() % 256"/>
+        <property name="disableFullTableScan" value="false"/>
+    </bean>
+
+    <bean id="record_statistics" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="tbRuleArray" value="#user_id#.longValue() % 256"/>
+        <property name="disableFullTableScan" value="false"/>
+    </bean>
+
+    <bean id="tmall_baby" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0063]"/>
+        <property name="tbRuleArray" value="#user_id#.longValue() % 64"/>
+        <property name="disableFullTableScan" value="true"/>
+    </bean>
+
+    <bean id="tmall_member_own_prop" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="tbRuleArray" value="#member_id#.longValue() % 256"/>
+        <property name="disableFullTableScan" value="true"/>
+    </bean>
+
+    <bean id="tmall_member_use_prop" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="tbRuleArray" value="#member_id#.longValue() % 256"/>
+        <property name="disableFullTableScan" value="true"/>
+    </bean>
+
+    <bean id="tmall_checkin" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0255]"/>
+        <property name="tbRuleArray" value="#user_id#.longValue() % 256"/>
+        <property name="disableFullTableScan" value="true"/>
+    </bean>
+
+    <bean id="tmall_member_guess_record" class="com.taobao.tddl.common.config.beans.TableRule">
+        <property name="dbIndexes" value="TMALL_MEMBER_GROUP"/>
+        <property name="tbSuffix" value="throughAllDB:[_0000-_0063]"/>
+        <property name="tbRuleArray" value="#user_id#.longValue() % 64"/>
+        <property name="disableFullTableScan" value="false"/>
+    </bean>
+</beans>

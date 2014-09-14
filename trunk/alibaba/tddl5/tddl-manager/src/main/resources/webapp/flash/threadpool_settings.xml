@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <text_size>14</text_size>
+  <text_color>5F5F5F</text_color>
+  <redraw>1</redraw>
+  <pie>
+    <colors>1AAFE7,ABC930</colors>
+    <x>30%</x>
+    <y>50%</y>
+    <radius>45%</radius>
+    <height>5</height>
+    <angle>30</angle>
+    <start_angle>270</start_angle>
+    <hover_brightness>20</hover_brightness>
+    <gradient>linear</gradient>
+  </pie>
+  <data_type>csv</data_type>
+  <precision>1</precision>
+  <background>
+    <alpha>100</alpha>
+    <border_color>FFFFFF</border_color>
+  </background>
+  <balloon>
+    <show><![CDATA[{title}: {percents}%  <br>{description}]]></show>
+    <alpha>0</alpha>
+    <text_size>12</text_size>
+    <max_width>200</max_width>
+  </balloon>
+  <legend>
+    <x>20</x>
+    <y>50</y>
+    <max_columns>1</max_columns>
+    <text_size>14</text_size>
+    <align>right</align>
+    <values>
+      <enabled>1</enabled>
+      <text>{value}</text>
+    </values>
+  </legend>
+  <data_labels>
+    <radius>6%</radius>
+    <max_width>140</max_width>
+    <show_lines>0</show_lines>
+    <avoid_overlapping>0</avoid_overlapping>
+  </data_labels>
+</settings>

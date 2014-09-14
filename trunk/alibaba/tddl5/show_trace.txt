@@ -1,0 +1,33 @@
+SQL:select * from tddl_orders o join tddl_users  s on o.seller_id=s.id
+Cost Time:100ms
+Index Nested Loop Join
+-Query from left:TDDL_ORDERS   Cost Time:50ms
+	Execute sql on TDDL5_00_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0000 O   Cost Time:5ms                                                                          
+	Execute sql on TDDL5_00_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0003 O   Cost Time:5ms                                                                          
+	Execute sql on TDDL5_00_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0002 O   Cost Time:5ms                                                                          
+	Execute sql on TDDL5_00_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0001 O   Cost Time:5ms                                                                          
+	-Execute sql on TDDL5_01_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0007 O  Cost Time:5ms                                                                           
+		Get a row: ID:5001 GMT_CREATE:2014-06-16 17:06:48.0 GMT_MODIFIED:2014-06-16 17:06:48.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029                                                                                         
+		Get a row: ID:5002 GMT_CREATE:2014-06-16 17:06:49.0 GMT_MODIFIED:2014-06-16 17:06:49.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029                                                                                         
+		Get a row: ID:5003 GMT_CREATE:2014-06-16 17:06:50.0 GMT_MODIFIED:2014-06-16 17:06:50.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029                                                                                         
+		Get a row: ID:6001 GMT_CREATE:2014-06-18 16:08:06.0 GMT_MODIFIED:2014-06-18 16:08:06.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029                                                                                         
+	Execute sql on TDDL5_01_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0006 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_01_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0005 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_01_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0004 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_03_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0013 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_03_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0012 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_03_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0015 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_03_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0014 O   Cost Time:5ms                                                                            
+	Execute sql on TDDL5_02_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0008 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_02_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0011 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_02_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0010 O   Cost Time:5ms                                                                             
+	Execute sql on TDDL5_02_GROUP, sql is: select O.ID,O.GMT_CREATE,O.GMT_MODIFIED,O.BUYER_ID,O.ITEM_ID,O.SELLER_ID from tddl_orders_0009 O   Cost Time:5ms                                                                             
+Get from left: ID=1029,1029,1029,1029     
+-Query from right:TDDL_USERS   Cost Time:20ms                                                                        
+	-Execute sql on TDDL5_01_GROUP, sql is: select S.ID,S.GMT_CREATE,S.GMT_MODIFIED,S.NAME,S.ADDRESS from tddl_users_0005 S where (S.ID IN (?)), params is: {1029}      Cost Time:19ms                                                     
+		Get a row: ID:1029 GMT_CREATE:2014-05-30 14:32:59.0 GMT_MODIFIED:2014-06-09 14:01:34.0 NAME:sun1 ADDRESS:sysu   
+-Join record with left and right	Cost Time:30ms	
+	Join a row: ID:5001 GMT_CREATE:2014-06-16 17:06:48.0 GMT_MODIFIED:2014-06-16 17:06:48.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029 ID:1029 GMT_CREATE:2014-05-30 14:32:59.0 GMT_MODIFIED:2014-06-09 14:01:34.0 NAME:sun1 ADDRESS:sysu  
+	Join a row: ID:5002 GMT_CREATE:2014-06-16 17:06:49.0 GMT_MODIFIED:2014-06-16 17:06:49.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029 ID:1029 GMT_CREATE:2014-05-30 14:32:59.0 GMT_MODIFIED:2014-06-09 14:01:34.0 NAME:sun1 ADDRESS:sysu  
+	Join a row: ID:5003 GMT_CREATE:2014-06-16 17:06:50.0 GMT_MODIFIED:2014-06-16 17:06:50.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029 ID:1029 GMT_CREATE:2014-05-30 14:32:59.0 GMT_MODIFIED:2014-06-09 14:01:34.0 NAME:sun1 ADDRESS:sysu  
+	Join a row: ID:6001 GMT_CREATE:2014-06-18 16:08:06.0 GMT_MODIFIED:2014-06-18 16:08:06.0 BUYER_ID:1031 ITEM_ID:1002 SELLER_ID:1029 ID:1029 GMT_CREATE:2014-05-30 14:32:59.0 GMT_MODIFIED:2014-06-09 14:01:34.0 NAME:sun1 ADDRESS:sysu

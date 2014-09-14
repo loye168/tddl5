@@ -1,0 +1,22 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot" init-method="init">
+        <property name="dbType" value="MYSQL" />
+        <property name="tableRules">
+            <map>
+                 <entry key="huangpu_prefer" value-ref="huangpuPrefer" />
+            </map>
+        </property>
+        <!--  
+        <property name="defaultDbIndex" value="TAOBAO_HUANGPU_GROUP"/>
+        -->
+    </bean>
+    
+    <bean id="huangpuPrefer" class="com.taobao.tddl.interact.rule.TableRule" init-method="init">
+        <property name="tbRuleArray">
+            <value>#content_id,1_number,256#.longValue()%256</value>
+        </property>
+        <property name="tbNamePattern" value="huangpu_prefer_{0000}" />
+        <property name="dbNamePattern" value="TAOBAO_HUANGPU_GROUP"/>
+    </bean>
+</beans>

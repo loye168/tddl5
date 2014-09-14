@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clusters>
+  <cluster>
+    <property name="id">1</property>
+    <property name="sortId">0</property>
+    <property name="name">daily3A</property>
+    <property name="deployContact">梦实</property>
+    <property name="maintContact">梦实</property>
+    <property name="onlineTime">2012-11-27</property>
+    <property name="deployDesc">公共集群</property>
+     <property name="env">center</property>
+  </cluster>
+  <cluster>
+    <property name="id">2</property>
+    <property name="sortId">0</property>
+    <property name="name">tddl511</property>
+    <property name="deployContact">梦实</property>
+    <property name="maintContact">梦实</property>
+    <property name="onlineTime">2014-06-01</property>
+    <property name="deployDesc">测试下</property>
+    <property name="env">center</property>
+  </cluster>
+</clusters>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.rule.VirtualTableRoot"
+		init-method="init">
+		<property name="defaultDbIndex" value="TRIP_ORDER_00_GROUP"/>
+		<!-- 请修改成应用默认的group -->
+		<property name="dbType" value="MYSQL"></property>
+		<property name="tableRules">
+			<map>
+				<entry key="trip_order" value-ref="trip_order" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="trip_order" class="com.taobao.tddl.rule.config.TableRule">
+		<property name="dbNamePattern" value="TRIP_ORDER_{00}_GROUP" />
+		<property name="dbRuleArray">
+			<value>((#buyer_id,1,128#)%128).intdiv(32)</value>
+		</property>
+		<property name="tbNamePattern" value="trip_order_{0000}" />
+		<property name="tbRuleArray">
+			<value>((#buyer_id,1,128#)%128).intValue()</value>
+		</property>
+        <property name="allowFullTableScan" value="true"/>
+	</bean>
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot"
+		init-method="init">
+		<property name="dbType" value="MYSQL" />
+		<property name="tableRules">
+			<map>
+				<entry key="user_device_token" value-ref="user_device_token" />
+				<entry key="push_device" value-ref="push_device" />
+				<entry key="push_uuid_device" value-ref="push_uuid_device" />
+			</map>
+		</property>
+	</bean>
+	<bean id="user_device_token" class="com.taobao.tddl.interact.rule.TableRule">
+		<property name="dbNamePattern" value="TMALL_PUSH_{0000}_GROUP" />
+		<property name="tbNamePattern" value="user_device_token_{0000}" />
+		<property name="dbRuleArray"
+			value="((#user_id,1,64#).longValue() % 64).intdiv(16)" />
+		<property name="tbRuleArray" value="((#user_id,1,64#).longValue() % 64)" />
+		<property name="allowFullTableScan" value="false" />
+	</bean>
+	<bean id="push_device" class="com.taobao.tddl.interact.rule.TableRule">
+		<property name="dbNamePattern" value="TMALL_PUSH_{0000}_GROUP" />
+		<property name="tbNamePattern" value="push_device_{0000}" />
+		<property name="dbRuleArray"
+			value="(#device_token,1,1#.toString().hashCode().abs().longValue() % 256).intdiv(64)" />
+		<property name="tbRuleArray"
+			value="(#device_token,1,1#.toString().hashCode().abs().longValue() % 256)" />
+		<property name="allowFullTableScan" value="false" />
+	</bean>
+	<bean id="push_uuid_device" class="com.taobao.tddl.interact.rule.TableRule">
+		<property name="dbNamePattern" value="TMALL_PUSH_{0000}_GROUP" />
+		<property name="tbNamePattern" value="push_uuid_device_{0000}" />
+		<property name="dbRuleArray"
+			value="(#device_uuid,1,1#.toString().hashCode().abs().longValue() % 256).intdiv(64)" />
+		<property name="tbRuleArray"
+			value="(#device_uuid,1,1#.toString().hashCode().abs().longValue() % 256)" />
+		<property name="allowFullTableScan" value="false" />
+	</bean>
+</beans>

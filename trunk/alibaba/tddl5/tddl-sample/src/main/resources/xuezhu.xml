@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot" init-method="init">
+    <property name="dbType" value="MYSQL" />
+    <property name="defaultDbIndex" value="BULLET_GROUP" />
+    <property name="tableRules">
+      <map>
+        <entry key="bullet_dt_device_content" value-ref="bullet_dt_device_content" />
+        <entry key="bullet_dt_mac_play" value-ref="bullet_dt_mac_play" />
+        <entry key="user_action" value-ref="user_action" />
+      </map>
+    </property>
+  </bean>
+  <bean id="bullet_dt_device_content" class="com.taobao.tddl.interact.rule.TableRule">
+    <property name="dbNamePattern" value="BULLET_GROUP" />
+    <property name="tbNamePattern" value="bullet_dt_device_content_{0000}" />
+    <property name="tbRuleArray" value="((#device_id,1,256#).longValue() % 256)" />
+    <property name="allowFullTableScan" value="false" />
+  </bean>
+  <bean id="bullet_dt_mac_play" class="com.taobao.tddl.interact.rule.TableRule">
+    <property name="dbNamePattern" value="BULLET_GROUP" />
+    <property name="tbNamePattern" value="bullet_dt_mac_play_{0000}" />
+    <property name="tbRuleArray" value="((#dc_id,1,256#).longValue() % 256)" />
+    <property name="allowFullTableScan" value="false" />
+  </bean>
+  <bean id="user_action" class="com.taobao.tddl.interact.rule.TableRule">
+    <property name="dbNamePattern" value="BULLET_GROUP" />
+    <property name="tbNamePattern" value="user_action_{0000}" />
+    <property name="tbRuleArray" value="((#device_id,1,256#).longValue() % 256)" />
+    <property name="allowFullTableScan" value="false" />
+  </bean>
+</beans>
+        					

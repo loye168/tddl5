@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tables xmlns="https://github.com/tddl/tddl/schema/table" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/tddl/tddl/schema/table https://raw.github.com/tddl/tddl/master/tddl-common/src/main/resources/META-INF/table.xsd">
+    
+	<table name="adam_stream_sample_collect">
+		<columns>
+			<column name="id" type="long"/>
+			<column name="gmt_create" type="datetime"/>
+			<column name="gmt_modified" type="datetime"/>
+			<column name="date_time" type="datetime"/>
+			<column name="data_value" type="long"/>
+			<column name="index_id" type="long"/>
+			<column name="report_time" type="datetime"/>
+			<column name="dimension_value" type="string"/>
+			<column name="combine_key" type="string"/>
+		</columns>
+		<primaryKey>id</primaryKey>
+	</table>
+	
+	
+</tables>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding">
+			<value>utf-8</value>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	
+	<bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot" init-method="init">
+		<property name="defaultDbIndex" value="${mercury.tddl.datasource.group.g}"></property>
+		<property name="dbType" value="MYSQL"></property>
+		<property name="tableRules">
+			<map>
+				<entry key="adgroup_targeting_word" value-ref="adgroup_targeting_word"></entry>
+				<entry key="adgroup_targeting_word_setting" value-ref="adgroup_targeting_word_setting"></entry>
+				<entry key="campaign" value-ref="campaign"></entry>
+				<entry key="campaign_setting" value-ref="campaign_setting"></entry>
+				<entry key="campaign_targeting_tag" value-ref="campaign_targeting_tag"></entry>
+				<entry key="adgroup" value-ref="adgroup"></entry>
+				<entry key="adgroup_setting" value-ref="adgroup_setting"></entry>
+				<entry key="adgroup_targeting_tag" value-ref="adgroup_targeting_tag"></entry>
+				<entry key="creative_ref" value-ref="creative_ref"></entry>
+				<entry key="creative_ref_setting" value-ref="creative_ref_setting"></entry>
+				<entry key="creative_ref_targeting_tag" value-ref="creative_ref_targeting_tag"></entry>
+                <entry key="creative_element_audit" value-ref="creative_element_audit"></entry>
+                <entry key="creative_audit" value-ref="creative_audit"></entry>
+                <entry key="creative_element" value-ref="creative_element"></entry>
+                <entry key="creative" value-ref="creative"></entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 分库规则基类 -->
+	<bean id="basePartionDBRule" class="com.taobao.tddl.interact.rule.TableRule" abstract="true">
+		<property name="dbNamePattern" value="${mercury.tddl.datasource.group.p.pattern}"></property>
+		<property name="dbRuleArray">
+			<value>(#member_id,32,1024#.longValue() % 1024).intdiv(32)</value>
+		</property>
+	</bean>
+
+	<!-- 分表规则基类 -->
+	<bean id="basePartionTableRule" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule" abstract="true">
+		<property name="tbRuleArray">
+			<value>#member_id,1,1024#.longValue() % 1024</value>
+		</property>
+	</bean>
+
+	<!-- 这些表只分库不分表,所以继承basePartionDBRule -->
+	<bean id="campaign" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="campaign"></property>
+	</bean>
+	<bean id="campaign_setting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="campaign_setting"></property>
+	</bean>
+	<bean id="campaign_targeting_tag" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="campaign_targeting_tag"></property>
+	</bean>
+	<bean id="adgroup" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="adgroup"></property>
+	</bean>
+	<bean id="adgroup_setting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="adgroup_setting"></property>
+	</bean>
+	<bean id="adgroup_targeting_tag" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="adgroup_targeting_tag"></property>
+	</bean>
+	<bean id="creative_ref" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="creative_ref"></property>
+	</bean>
+	<bean id="creative_ref_setting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="creative_ref_setting"></property>
+	</bean>
+	<bean id="creative_ref_targeting_tag" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionDBRule">
+		<property name="tbNamePattern" value="creative_ref_targeting_tag"></property>
+	</bean>
+
+	<!-- 这些表又分库又分表,所以继承basePartionDBRule -->
+	<bean id="adgroup_targeting_word" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+		<property name="tbNamePattern" value="adgroup_targeting_word_{0000}"></property>
+	</bean>
+    <bean id="adgroup_targeting_word_setting" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+        <property name="tbNamePattern" value="adgroup_targeting_word_setting_{0000}"></property>
+    </bean>
+
+    <!-- 这些表又分库又分表,所以继承basePartionDBRule -->
+    <bean id="creative_element_audit" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+        <property name="tbNamePattern" value="creative_element_audit_{0000}"></property>
+    </bean>
+    <bean id="creative_audit" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+        <property name="tbNamePattern" value="creative_audit_{0000}"></property>
+    </bean>
+    <bean id="creative_element" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+        <property name="tbNamePattern" value="creative_element_{0000}"></property>
+    </bean>
+    <bean id="creative" class="com.taobao.tddl.interact.rule.TableRule" parent="basePartionTableRule">
+        <property name="tbNamePattern" value="creative_{0000}"></property>
+    </bean>
+</beans>

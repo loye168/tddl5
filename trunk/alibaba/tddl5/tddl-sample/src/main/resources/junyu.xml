@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.interact.rule.VirtualTableRoot" init-method="init">
+		<property name="defaultDbIndex" value="ALIMANAGE_GROUP" />
+		<property name="dbType" value="MYSQL" />
+		<property name="tableRules">
+			<map>
+			</map>
+		</property>
+	</bean>
+</beans>
