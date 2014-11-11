@@ -12,11 +12,11 @@
 	<packaging>jar</packaging>
 	<name>${project.artifactId} module for tddl ${project.version}</name>
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>tddl-client</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>tddl-matrix</artifactId>

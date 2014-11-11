@@ -18,9 +18,19 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>tddl-client</artifactId>
+			<version>${project.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>tddl-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>tddl-matrix</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
