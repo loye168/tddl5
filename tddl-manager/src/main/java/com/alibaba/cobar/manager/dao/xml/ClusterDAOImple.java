@@ -39,11 +39,11 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.taobao.diamond.client.Diamond;
 import com.taobao.diamond.client.impl.DiamondEnv;
 import com.taobao.diamond.client.impl.DiamondUnitSite;
-import com.taobao.tddl.client.jdbc.TDataSource;
 import com.taobao.tddl.common.exception.TddlException;
 import com.taobao.tddl.common.utils.GeneralUtil;
 import com.taobao.tddl.common.utils.logger.Logger;
 import com.taobao.tddl.common.utils.logger.LoggerFactory;
+import com.taobao.tddl.matrix.jdbc.TDataSource;
 
 /**
  * @author haiqing.zhuhq 2011-6-14
